@@ -1,15 +1,14 @@
 package pascal
 
 // Triangle produces a pascal triangle of n rows.
-func Triangle(n int) (res [][]int) {
-	res = append(res, []int{1})
-	for i := 1; i < n; i++ {
-		row := []int{1}
+func Triangle(n int) [][]int {
+	triangle := make([][]int, n)
+	for i := 0; i < n; i++ {
+		triangle[i] = make([]int, i+1)
+		triangle[i][0], triangle[i][i] = 1, 1
 		for j := 1; j < i; j++ {
-			row = append(row, res[i-1][j-1]+res[i-1][j])
+			triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j]
 		}
-		row = append(row, 1)
-		res = append(res, row)
 	}
-	return
+	return triangle
 }
